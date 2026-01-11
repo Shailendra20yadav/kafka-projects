@@ -1,0 +1,21 @@
+docker compose up -d
+docker exec -it -w /opt/kafka/bin kafka-broker sh
+
+Then create a topic:
+
+./kafka-topics.sh --create --topic my-topic --bootstrap-server broker:29092
+
+Produce message:
+
+./kafka-console-producer.sh  --topic my-topic --bootstrap-server broker:29092
+
+Consume message:
+
+./kafka-console-consumer.sh --topic my-topic --from-beginning --bootstrap-server broker:29092
+
+Windows:
+
+set KAFKA_CLUSTER_ID=1
+ set KAFKA_CLUSTER_ID="%(kafka-storage.bat random-uuid)%"
+
+kafka-storage.bat format --standalone -t $KAFKA_CLUSTER_ID -c ../../config/server.properties
